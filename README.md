@@ -24,10 +24,10 @@
     <img src="images/gcp.png" alt="Logo" width="160" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">GCP Web Application</h3>
 
   <p align="center">
-    project_description
+    A terraform project that is built to deploy a scalable web application.
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />

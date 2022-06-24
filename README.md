@@ -42,7 +42,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 ## Contact
 
-Michael Quinton - michael@quinton.io
+Michael Quinton
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

@@ -12,7 +12,7 @@
 <h3 align="center">GCP Web Application</h3>
 
   <p align="center">
-    A terraform project that is built to deploy a scalable web application.
+    A terraform project that is built to deploy a scalable web application within Google Cloud.
   </p>
 </div>
 
@@ -21,22 +21,11 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
 ### Built With
 
 * [Terraform](https://www.terraform.io/)
 * [Google Cloud](https://cloud.google.com/)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.

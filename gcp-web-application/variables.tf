@@ -1,6 +1,7 @@
 locals {
     gcp_service_account_name = "${var.gcp_project}-svc"
     cloud_sql_instance_name = "${var.gcp_project}-db"
+    mig_instance_name = "app-flask-vm"
 }
 
 variable "region" {
@@ -15,7 +16,7 @@ variable "zone" {
     default = "europe-west2-c"
 }
 
-variable "gcp_project" {
+variable "project" {
     type = string
     description = "Name of the project"
     default = "appsbroker-web-application"
@@ -56,6 +57,30 @@ variable "database_name" {
     default = "app-db"
 }
 
+variable "machine_type" {
+    type = string
+    description = "Compute type to deploy"
+    default = "f1-micro"
+}
+
+variable "source_image_family" {
+  type        = string
+  description = "Source image family. If neither source_image nor source_image_family is specified, defaults to the latest public Ubuntu image."
+  default     = "ubuntu-minimal-2204-lts"
+}
+
+variable "source_image_project" {
+  type        = string
+  description = "Project where the source image comes from"
+  default     = "ubuntu-os-cloud"
+}
+
+variable "mig_size" {
+    type = number
+    description = "Number of instances"
+    default = 1
+}
+
 variable "services" {
     type = list(string)
     description = "List of services to enable for project"
@@ -65,6 +90,7 @@ variable "services" {
         "appengineflex.googleapis.com",
         "cloudbuild.googleapis.com",
         "secretmanager.googleapis.com",
-        "servicenetworking.googleapis.com"
+        "servicenetworking.googleapis.com",
+        "iam.googleapis.com"
     ]
 }

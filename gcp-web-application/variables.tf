@@ -1,6 +1,6 @@
 locals {
-    gcp_service_account_name = "${var.gcp_project}-svc"
-    cloud_sql_instance_name = "${var.gcp_project}-db"
+    gcp_service_account_name = "${var.project}-svc"
+    cloud_sql_instance_name = "${var.project}-db1"
     mig_instance_name = "app-flask-vm"
 }
 
@@ -36,7 +36,7 @@ variable "subnet_range" {
 variable "subnet_name" {
   type        = string
   description = "Name for the subnet"
-  default     = "votr-subnet"
+  default     = "app-subnet"
 }
 
 variable "database_version" {

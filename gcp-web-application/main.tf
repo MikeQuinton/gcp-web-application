@@ -1,6 +1,6 @@
 /*****************************************
   API'S
- *****************************************
+ *****************************************/
 
 # Enabling API's for deployment
 resource "google_project_service" "service" {
@@ -26,7 +26,7 @@ resource "google_compute_subnetwork" "app-subnet" {
     name = var.subnet_name
     ip_cidr_range = var.subnet_range
     region = var.region
-    network = google_compute_network.app-network
+    network = google_compute_network.app-network.name
 }
 
 resource "google_compute_router" "app-router" {
@@ -61,7 +61,7 @@ resource "google_compute_firewall" "http" {
     }
 
     target_tags = ["allow-http"]
-
+    source_tags = ["web"]
 }
 
 # Private IP for SQL
@@ -85,11 +85,11 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 
 # Creating SQL instance
 resource "google_sql_database_instance" "app-sql" {
-    name = local.cloud_sql_instance_namegit
+    name = local.cloud_sql_instance_name
     database_version = var.database_version
     region = var.region
     project = var.project
-    deletion_protection = false
+    deletion_protection = true
 
     settings {
 
@@ -142,16 +142,24 @@ resource "google_secret_manager_secret" "app-secret" {
     provider = google-beta
     project = var.project
     secret_id = "app-token"
+
+    replication {
+        user_managed {
+            replicas {
+                location = "europe-west1"
+            }
+        }
+    }
 }
 
 resource "google_secret_manager_secret_version" "app-secret-version" {
     provider = google-beta
-    secret = google_secret_manager_secret.app-secret.secret_id
+    secret = google_secret_manager_secret.app-secret.id
     secret_data = jsonencode({
         "DB_USER" = "root"
         "DB_PASS" = random_password.mysql_root.result
         "DB_NAME" = var.database_name
-        "DB_HOST" = "${google_sql_database_instance.app-sql.private_ip-address}:3306"
+        "DB_HOST" = "${google_sql_database_instance.app-sql.private_ip_address}:3306"
     })
 }
 
@@ -184,7 +192,7 @@ resource "google_secret_manager_secret_iam_member" "app-secret-member" {
     }
 
     disk_size_gb = 10
-    disk_type = "pd_standard"
+    disk_type = "pd-standard"
     auto_delete = true
     name_prefix = local.mig_instance_name
     source_image_family = var.source_image_family
@@ -198,14 +206,15 @@ resource "google_secret_manager_secret_iam_member" "app-secret-member" {
         "allow-http", "app-flask-vm"
     ]
  }
-module "mig" {
+ 
+module "mig" { 
     source = "terraform-google-modules/vm/google//modules/mig"
     version = "~> 7.0"
     project_id = var.project
     subnetwork_project = var.project
     hostname = local.mig_instance_name
     region = var.region
-    instance = module.mig_template.self_link
+    instance_template = module.mig_template.self_link
     autoscaling_enabled = true
     cooldown_period = 60
 }

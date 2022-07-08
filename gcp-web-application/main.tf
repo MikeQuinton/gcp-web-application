@@ -184,6 +184,7 @@ resource "google_secret_manager_secret_iam_member" "app-secret-member" {
     subnetwork = var.subnet_name
     subnetwork_project = var.project
     region = var.region
+    startup_script = file("startup.sh")
     service_account = {
         email = google_service_account.service_account.email
         scopes = [
@@ -191,7 +192,7 @@ resource "google_secret_manager_secret_iam_member" "app-secret-member" {
         ]
     }
 
-    disk_size_gb = 10
+    disk_size_gb = 15
     disk_type = "pd-standard"
     auto_delete = true
     name_prefix = local.mig_instance_name

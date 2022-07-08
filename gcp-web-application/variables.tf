@@ -1,6 +1,6 @@
 locals {
     gcp_service_account_name = "${var.project}-svc"
-    cloud_sql_instance_name = "${var.project}-db1"
+    cloud_sql_instance_name = "${var.project}-db10"
     mig_instance_name = "app-flask-vm"
 }
 
@@ -60,7 +60,7 @@ variable "database_name" {
 variable "machine_type" {
     type = string
     description = "Compute type to deploy"
-    default = "f1-micro"
+    default = "e2-medium"
 }
 
 variable "source_image_family" {

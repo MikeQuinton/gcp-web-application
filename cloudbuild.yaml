@@ -1,5 +1,5 @@
 steps:
-- id: 'terraform build'
+- id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
@@ -18,3 +18,5 @@ steps:
 
         echo "Applying config..."
         terraform apply -auto-approve webapp.plan
+  options:
+    logging: CLOUD_LOGGING_ONLY

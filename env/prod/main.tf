@@ -18,7 +18,7 @@ resource "random_id" "instance_id" {
   byte_length = 8
 }
 
-resource "google_storage_bucket" "default" {
+resource "google_storage_bucket" "tf-bucket" {
   name          = "appsbroker-webapp-prod"
   force_destroy = false
   location      = "EU"
@@ -108,7 +108,7 @@ resource "google_sql_database_instance" "app-sql" {
     database_version = var.database_version
     region = var.region
     project = var.project
-    deletion_protection = true
+    deletion_protection = false
 
     settings {
 

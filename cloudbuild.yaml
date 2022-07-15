@@ -1,9 +1,9 @@
 steps:
-- id: 'tf init'
+- id: 'terraform build'
   name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
   options:
     logging: CLOUD_LOGGING_ONLY
+  entrypoint: 'sh'
   args: 
   - '-c'
   - |

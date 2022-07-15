@@ -93,6 +93,7 @@ variable "services" {
         "servicenetworking.googleapis.com",
         "iam.googleapis.com",
         "storage.googleapis.com",
-        "cloudbuild.googleapis.com"
+        "cloudbuild.googleapis.com",
+        "cloudresourcemanager.googleapis.com"
     ]
 }

@@ -1,8 +1,9 @@
 steps:
-- id: 'tf init'
+- id: 'terraform build'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
-  args: ['-c']
+  args: 
+  - '-c'
   - |
         cd env/prod
         

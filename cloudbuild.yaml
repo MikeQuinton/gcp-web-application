@@ -18,5 +18,3 @@ steps:
 
         echo "Applying config..."
         terraform apply -auto-approve webapp.plan
-  options:
-    logging: NONE

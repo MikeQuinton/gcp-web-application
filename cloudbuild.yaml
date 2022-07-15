@@ -3,8 +3,6 @@ steps:
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: ['-c']
-  options:
-    logging: NONE
   - |
         cd env/prod
         
@@ -19,3 +17,5 @@ steps:
 
         echo "Applying config..."
         terraform apply -auto-approve webapp.plan
+  options:
+    logging: NONE

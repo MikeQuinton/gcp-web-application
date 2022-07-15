@@ -14,7 +14,7 @@ steps:
         terraform validate
 
         echo "planning config..."
-        terraform plan -out webapp.plan
+        terraform plan || exit 1
 
         echo "Applying config..."
-        terraform apply -auto-approve webapp.plan
+        terraform apply -auto-approve

@@ -10,6 +10,8 @@ terraform {
 
 terraform {
   backend "gcs" {
+    bucket = "appsbroker-webapp-prod"
+    prefix = "prod\tf-state"
   }
 }
 

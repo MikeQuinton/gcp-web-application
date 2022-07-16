@@ -11,6 +11,16 @@ resource "google_project_service" "service" {
 }
 
 /*****************************************
+  Service Account
+ *****************************************/  
+
+resource "google_service_account" "service_account" {
+    account_id = local.gcp_service_account_name
+    display_name = local.gcp_service_account_name
+    project = var.project
+}
+
+/*****************************************
   VPC and Firewall
  *****************************************/
 

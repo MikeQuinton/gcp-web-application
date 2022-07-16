@@ -11,25 +11,6 @@ resource "google_project_service" "service" {
 }
 
 /*****************************************
-  Storage Bucket (Terraform State)
- *****************************************/
-
-resource "random_id" "instance_id" {
-  byte_length = 8
-}
-
-resource "google_storage_bucket" "tf-bucket" {
-  name          = "appsbroker-webapp-prod"
-  force_destroy = false
-  location      = "EU"
-  storage_class = "STANDARD"
-  project = var.project
-  versioning {
-    enabled = true
-  }
-}
-
-/*****************************************
   VPC and Firewall
  *****************************************/
 

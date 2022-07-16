@@ -154,10 +154,6 @@ resource "google_sql_user" "root" {
     name_prefix = local.mig_instance_name
     source_image_family = var.source_image_family
     source_image_project = var.source_image_project
-    
-    metadata = {
-        "secret-id" = google_secret_manager_secret_version.app-secret-version.name
-    }
 
     tags = [
         "allow-http", "app-flask-vm"

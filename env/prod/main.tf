@@ -128,50 +128,6 @@ resource "google_sql_user" "root" {
 }
 
 /*****************************************
-  Service account and Secret manager
- *****************************************/
-
-# Instance's service account for secrets manager
-resource "google_service_account" "service_account" {
-    account_id = local.gcp_service_account_name
-    display_name = local.gcp_service_account_name
-    project = var.project
-}
-
-resource "google_secret_manager_secret" "app-secret" {
-    provider = google-beta
-    project = var.project
-    secret_id = "app-token"
-
-    replication {
-        user_managed {
-            replicas {
-                location = "europe-west1"
-            }
-        }
-    }
-}
-
-resource "google_secret_manager_secret_version" "app-secret-version" {
-    provider = google-beta
-    secret = google_secret_manager_secret.app-secret.id
-    secret_data = jsonencode({
-        "DB_USER" = "root"
-        "DB_PASS" = random_password.mysql_root.result
-        "DB_NAME" = var.database_name
-        "DB_HOST" = "${google_sql_database_instance.app-sql.private_ip_address}:3306"
-    })
-}
-
-resource "google_secret_manager_secret_iam_member" "app-secret-member" {
-    provider = google-beta
-    project = var.project
-    secret_id = google_secret_manager_secret.app-secret.id
-    role = "roles/secretmanager.secretAccessor"
-    member = "serviceAccount:${google_service_account.service_account.email}"
-}
-
-/*****************************************
   Managed Instance Group
  *****************************************/
 

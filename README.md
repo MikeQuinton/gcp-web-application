@@ -44,7 +44,9 @@ sudo cat <<EOF > /var/www/html/index.html
 
 ### Task 2
 
-Application running on a private network with access to a database service and object storage
+Application running on a private network with access to a database service.
+
+##### VPC Configuration
 
 ```hcl
 resource "google_compute_network" "app-network" {

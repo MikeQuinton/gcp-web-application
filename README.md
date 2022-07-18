@@ -83,6 +83,35 @@ resource "google_compute_router_nat" "app-nat" {
   source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
 ```
 
+```hcl
+# Private IP for SQL
+resource "google_compute_global_address" "private_ip_address" {
+  provider      = google-beta
+  project       = var.project
+  name          = "app-db-ip-address"
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  prefix_length = 16
+  network       = google_compute_network.app-network.id
+}
+
+# Connection for DB
+resource "google_service_networking_connection" "private_vpc_connection" {
+  provider                = google-beta
+  network                 = google_compute_network.app-network.id
+  service                 = var.services[5]
+  reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
+}
+
+# Creating SQL instance
+resource "google_sql_database_instance" "app-sql" {
+  name                = local.cloud_sql_instance_name
+  database_version    = var.database_version
+  region              = var.region
+  project             = var.project
+  deletion_protection = false
+```
+
 ---
 
 ### Task 3

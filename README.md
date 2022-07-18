@@ -27,11 +27,11 @@
 
 ## Project requirements
 
-Task 1
+### Task 1
 
 Public facing "Hello world" application
 
-Task 2
+### Task 2
 
 Application running on a private network with access to a database service and object storage
 

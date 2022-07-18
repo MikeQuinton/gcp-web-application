@@ -27,15 +27,15 @@
 
 ## Project requirements
 
-#### Task 1
+### Task 1
 
 Public facing "Hello world" application
 
-#### Task 2
+### Task 2
 
 Application running on a private network with access to a database service and object storage
 
-Task 3
+### Task 3
 
 A highly available and scalable application
 
@@ -82,11 +82,11 @@ module "mig" {
 }
 ```
 
-Task 4
+### Task 4
 
 Cost effectiveness
 
-Task 5
+### Task 5
 
 Secure and compliant application
 

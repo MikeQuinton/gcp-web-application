@@ -124,7 +124,9 @@ resource "google_sql_database_instance" "app-sql" {
 
 ### Task 3
 
-A highly available and scalable application
+A highly available and scalable application.
+
+Utilising a [MIG module](https://registry.terraform.io/modules/terraform-google-modules/vm/google/latest/submodules/instance_template) to help create and manange an instance template to deploy on the desired network.
 
 ```hcl
 module "mig_template" {

@@ -24,7 +24,12 @@
 
 * [Terraform](https://www.terraform.io/)
 * [Google Cloud](https://cloud.google.com/)
+  * VPC
+  * Instance Group
+  * Load Balancing
+  * Cloud SQL Instance
 * [Ubuntu](https://ubuntu.com/)
+  * Ubuntu 22.04 LTS
 
 ## Project requirements
 

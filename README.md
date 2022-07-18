@@ -24,12 +24,12 @@
 
 * [Terraform](https://www.terraform.io/)
 * [Google Cloud](https://cloud.google.com/)
-  * VPC
-  * Instance Group
-  * Load Balancing
-  * Cloud SQL Instance
+  * [VPC](https://cloud.google.com/vpc/docs/vpc)
+  * [Instance Group](https://cloud.google.com/compute/docs/instance-groups)
+  * [Load Balancing](https://cloud.google.com/load-balancing/docs/https)
+  * [Cloud SQL Instance](https://cloud.google.com/sql/docs/mysql)
 * [Ubuntu](https://ubuntu.com/)
-  * Ubuntu 22.04 LTS
+  * [Ubuntu Minimal 22.04 LTS](https://cloud-images.ubuntu.com/daily/server/minimal/daily/jammy/current/)
 
 ## Project requirements
 

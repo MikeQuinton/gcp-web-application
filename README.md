@@ -12,7 +12,7 @@
 <h3 align="center">GCP Web Application</h3>
 
   <p align="center">
-    A terraform project that is built to deploy a scalable web application within Google Cloud.
+    A terraform project that will deploy a scalable web application within Google Cloud.
   </p>
 </div>
 
@@ -25,10 +25,27 @@
 * [Terraform](https://www.terraform.io/)
 * [Google Cloud](https://cloud.google.com/)
 
-## Getting Started
+## Project requirements
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Task 1
+
+Public facing "Hello world" application
+
+Task 2
+
+Application running on a private network with access to a database service and block store
+
+Task 3
+
+A highly available and scalable application
+
+Task 4
+
+Cost effectiveness
+
+Task 5
+
+Secure and compliant application
 
 ## Usage
 

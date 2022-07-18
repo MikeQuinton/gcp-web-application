@@ -31,6 +31,15 @@
 
 Public facing "Hello world" application
 
+```sh
+#!/bin/bash
+
+sudo apt-get update
+sudo apt -y install apache2
+sudo cat <<EOF > /var/www/html/index.html
+<html><body><p>Hello World!</p></body></html>
+```
+
 ---
 
 ### Task 2
@@ -134,10 +143,6 @@ Cost effectiveness
 Secure and compliant application
 
 ---
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 ## Contact
 

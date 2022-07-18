@@ -24,6 +24,7 @@
 
 * [Terraform](https://www.terraform.io/)
 * [Google Cloud](https://cloud.google.com/)
+* [Ubuntu] (https://ubuntu.com/)
 
 ## Project requirements
 

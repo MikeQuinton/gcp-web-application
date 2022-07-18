@@ -37,6 +37,8 @@ Public facing "Hello world" application
 
 Application running on a private network with access to a database service and object storage
 
+---
+
 ### Task 3
 
 A highly available and scalable application
@@ -84,13 +86,19 @@ module "mig" {
 }
 ```
 
+---
+
 ### Task 4
 
 Cost effectiveness
 
+---
+
 ### Task 5
 
 Secure and compliant application
+
+---
 
 ## Usage
 

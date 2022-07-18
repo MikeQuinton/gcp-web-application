@@ -39,6 +39,49 @@ Task 3
 
 A highly available and scalable application
 
+```hcl
+module "mig_template" {
+  source             = "terraform-google-modules/vm/google//modules/instance_template"
+  version            = "~> 7.0"
+  project_id         = var.project
+  machine_type       = var.machine_type
+  network            = var.network_name
+  subnetwork         = true ? var.subnet_name : google_compute_subnetwork.app-subnet.self_link
+  subnetwork_project = var.project
+  region             = var.region
+  startup_script     = file("startup.sh")
+  service_account = {
+    email = google_service_account.service_account.email
+    scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+  }
+
+  disk_size_gb         = 15
+  disk_type            = "pd-standard"
+  auto_delete          = true
+  name_prefix          = local.mig_instance_name
+  source_image_family  = var.source_image_family
+  source_image_project = var.source_image_project
+
+  tags = [
+    "allow-http", "app-flask-vm", "allow-ssh"
+  ]
+}
+
+module "mig" {
+  source              = "terraform-google-modules/vm/google//modules/mig"
+  version             = "~> 7.0"
+  project_id          = var.project
+  subnetwork_project  = var.project
+  hostname            = local.mig_instance_name
+  region              = var.region
+  instance_template   = module.mig_template.self_link
+  autoscaling_enabled = true
+  cooldown_period     = 60
+}
+```
+
 Task 4
 
 Cost effectiveness

@@ -37,6 +37,41 @@ Public facing "Hello world" application
 
 Application running on a private network with access to a database service and object storage
 
+```hcl
+resource "google_compute_network" "app-network" {
+  name                    = var.network_name
+  project                 = var.project
+  auto_create_subnetworks = false
+}
+
+resource "google_compute_subnetwork" "app-subnet" {
+  project       = var.project
+  name          = var.subnet_name
+  ip_cidr_range = var.subnet_range
+  region        = var.region
+  network       = google_compute_network.app-network.name
+}
+
+resource "google_compute_router" "app-router" {
+  name    = "${var.network_name}-router"
+  network = google_compute_network.app-network.self_link
+  region  = var.region
+  project = var.project
+}
+
+resource "google_compute_router_nat" "app-nat" {
+  project = var.project
+  name    = "${var.network_name}-nat"
+  router  = google_compute_router.app-router.name
+  region  = google_compute_router.app-router.region
+
+  # NAT IP's allocated by GCP
+  nat_ip_allocate_option = "AUTO_ONLY"
+
+  # All IP's in all subnets within the VPC can be allowed to NAT
+  source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+```
+
 ---
 
 ### Task 3

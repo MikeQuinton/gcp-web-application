@@ -29,7 +29,7 @@
 
 ### Task 1
 
-Public facing "Hello world" application
+Public facing "Hello world" application. The below shell script is executed after a computer instance is configured and powered on. HTTP server used is apache2.
 
 ```sh
 #!/bin/bash

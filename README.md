@@ -33,7 +33,7 @@ Public facing "Hello world" application
 
 Task 2
 
-Application running on a private network with access to a database service and block store
+Application running on a private network with access to a database service and object storage
 
 Task 3
 

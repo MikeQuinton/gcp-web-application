@@ -83,6 +83,8 @@ resource "google_compute_router_nat" "app-nat" {
   source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
 ```
 
+##### SQL Configuration
+
 ```hcl
 # Private IP for SQL
 resource "google_compute_global_address" "private_ip_address" {

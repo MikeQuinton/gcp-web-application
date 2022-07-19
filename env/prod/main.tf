@@ -60,18 +60,33 @@ resource "google_compute_router_nat" "app-nat" {
 }
 
 resource "google_compute_firewall" "http" {
-    project = var.project
-    name = "${var.network_name}-http-allow"
-    network = google_compute_network.app-network.name
-    description = "Firewall rule to allow HTTP traffic on target instances"
+  project     = var.project
+  name        = "${var.network_name}-http-allow"
+  network     = google_compute_network.app-network.name
+  description = "Firewall rule to allow HTTP traffic on target instances"
 
-    allow {
-      protocol = "tcp"
-      ports = ["80"]
-    }
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
 
-    target_tags = ["allow-http"]
-    source_tags = ["web"]
+  target_tags = ["allow-http"]
+  source_tags = ["web-http"]
+}
+
+resource "google_compute_firewall" "ssh" {
+  project     = var.project
+  name        = "${var.network_name}-iap-allow"
+  network     = google_compute_network.app-network.name
+  description = "Firewall rule to allow SSH traffic through IAP on target instances"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  target_tags   = ["allow-ssh"]
+  source_ranges = ["35.235.240.0/20"]
 }
 
 # Private IP for SQL

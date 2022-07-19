@@ -162,7 +162,7 @@ resource "google_sql_user" "root" {
     project_id = var.project
     machine_type = var.machine_type
     network = var.network_name
-    subnetwork = var.subnet_name
+    subnetwork = true ? var.subnet_name : google_compute_subnetwork.app-subnet.self_link
     subnetwork_project = var.project
     region = var.region
     startup_script = file("startup.sh")
@@ -181,7 +181,7 @@ resource "google_sql_user" "root" {
     source_image_project = var.source_image_project
 
     tags = [
-        "allow-http", "app-flask-vm"
+        "allow-http", "app-flask-vm", "allow-ssh"
     ]
  }
 
@@ -206,10 +206,7 @@ module "lb-http" {
   version = "6.2.0"
   name = "${var.network_name}-lb"
   project = var.project
-  target_tags = [
-    google_compute_router.app-router.name,
-    google_compute_subnetwork.app-subnet.name
-  ]
+  target_tags = []
   
   firewall_networks = [google_compute_network.app-network.name]
 

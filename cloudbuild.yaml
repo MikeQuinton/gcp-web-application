@@ -5,7 +5,7 @@ steps:
   args: 
   - '-c'
   - |
-        cd env/prod
+        cd env
         
         echo "Running initialisation..."
         terraform init

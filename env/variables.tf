@@ -10,11 +10,13 @@ variable "region" {
   default     = "europe-west2"
 }
 
+
 variable "zone" {
   type        = string
   description = "Default zone used for deployment"
   default     = "europe-west2-c"
 }
+
 
 variable "project" {
   type        = string
@@ -97,4 +99,10 @@ variable "services" {
     "cloudresourcemanager.googleapis.com",
     "serviceusage.googleapis.com"
   ]
+}
+
+variable "policy_name" {
+  default = "apps-waf-policy"
+  description = "Name of the default policy used by cloud armour"
+  type = string
 }

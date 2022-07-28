@@ -1,7 +1,7 @@
 locals {
   gcp_service_account_name = "${var.project}-svc"
   cloud_sql_instance_name  = "${var.project}-db"
-  mig_instance_name        = "app-flask-vm"
+  mig_instance_name        = "app-flask-vm-dev"
 }
 
 variable "region" {
@@ -16,16 +16,17 @@ variable "zone" {
   default     = "europe-west2-c"
 }
 
+
 variable "project" {
   type        = string
   description = "Name of the project"
-  default     = "appsbroker-web-application"
+  default     = "apps-web-app-dev"
 }
 
 variable "network_name" {
   type        = string
   description = "Name for the VPC network"
-  default     = "app-network"
+  default     = "app-network-dev"
 }
 
 variable "subnet_range" {
@@ -36,7 +37,7 @@ variable "subnet_range" {
 variable "subnet_name" {
   type        = string
   description = "Name for the subnet"
-  default     = "app-subnet"
+  default     = "app-subnet-dev"
 }
 
 variable "database_version" {
@@ -54,7 +55,7 @@ variable "database_tier" {
 variable "database_name" {
   type        = string
   description = "Name of database for app"
-  default     = "app-db"
+  default     = "app-db-dev"
 }
 
 variable "machine_type" {
@@ -97,4 +98,10 @@ variable "services" {
     "cloudresourcemanager.googleapis.com",
     "serviceusage.googleapis.com"
   ]
+}
+
+variable "policy_name" {
+  default = "apps-waf-policy-dev"
+  description = "Name of the default policy used by cloud armour"
+  type = string
 }

@@ -46,7 +46,7 @@ sudo cat <<EOF > /var/www/html/index.html
 
 ### Task 2
 
-Application running on a private network with access to a database service. Using the VPC service I have created a seperate network with a single subnet using an IP address range allocated for private use only.
+The application is running on a private network with access to a database service. Using the VPC service I have created a seperate network with a single subnet using an IP address range allocated for private use only.
 
 The SQL instance is on a seperate private for use range but will be able to communicate with the compute nodes via a peering route.
 
@@ -125,6 +125,23 @@ resource "google_sql_database_instance" "app-sql" {
 A highly available and scalable application.
 
 Utilising a [MIG module](https://registry.terraform.io/modules/terraform-google-modules/vm/google/latest/submodules/instance_template) to help create and manange an instance template to deploy on the desired network.
+
+Some of the benefits of the below are detailed below.
+
+##### High availabilty
+
+If an instance crashes, or is otherwise deleted by incorrect method. Another instance is automatically created in accordance with the specific template seen below and added to the group.
+
+Application based healing. If an application does not respond on a VM via specific port, etc... it will automatically recreate the VM.
+
+A MIG configured on a region will help spread VM's across multiple availability zones helping avoid outages and protecting against zonal failures. Example being the below case. A cooling failure in one of the buldings that hosts infrastructure for europe-west2-a with multiple services impacted this looks to have caused outages on compute engine and additional services.
+
+https://status.cloud.google.com/incidents/XVq5om2XEDSqLtJZUvcH
+
+##### Scalability 
+
+When additional resources are required through utilisation, or traffic. VM's can be autoscaled to grow the number instances to meet demand. Additionally, if demand drops, this is automatically scaled down to reduce costs and allow for elasticisty.
+
 
 ```hcl
 module "mig_template" {

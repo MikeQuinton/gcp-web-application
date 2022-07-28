@@ -31,7 +31,7 @@
 
 ### Task 1
 
-Public facing "Hello world" application. The below shell script is executed after a computer instance is configured and powered on. HTTP server used is apache2.
+The below "application" is deployed within the GCP cloud environment using the help of several different services which can be seen in the list above. The below shell script is executed after a computer instance is configured and powered on. HTTP server used is apache2.
 
 ```sh
 #!/bin/bash
@@ -46,7 +46,9 @@ sudo cat <<EOF > /var/www/html/index.html
 
 ### Task 2
 
-Application running on a private network with access to a database service.
+Application running on a private network with access to a database service. Using the VPC service I have created a seperate network with a single subnet using an IP address range allocated for private use only.
+
+The SQL instance is on a seperate private for use range but will be able to communicate with the compute nodes via a peering route.
 
 ##### VPC Configuration
 

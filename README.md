@@ -33,7 +33,7 @@
 
 The below "application" is deployed within the GCP cloud environment using the help of several different services which can be seen in the list above. The below shell script is executed after a computer instance is configured and powered on. HTTP server used is apache2.
 
-Some of the code using to help setup and display this application publicy can be seen in the below tasks.
+Some of the code used to help setup and display this application publicy can be seen in the below tasks.
 
 ```sh
 #!/bin/bash

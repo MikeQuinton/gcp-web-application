@@ -175,11 +175,55 @@ module "mig" {
 
 Cost effectiveness
 
+To better understand this we can enable metrics, budgets and alerts to give us the overview of where funds are being spent within GCP and assess any of the costs. If required we can implement some of the below to bring these down.
+
+I believe this can be tackled from a few different persepectives. One being the set resource allocation on the managed instance groups. When the instances are built they are being allocated a set amount of resources, so lets say for example 1 vCPU and 2 GiB's of memory. The application itself in runtime might not be using that amount of resources to it's full capacity and may only need half or a quarter of this depending on what it requires. This could be tackled with a serverless application where in you may only be required to pay for the compute usage, so the the cpu and the ram that the application is using.
+
+If we are looking to stick with the current managed instance group service we can specifically look to lower the tier on certain resources such the instance type and disk type. We can even go as far creating a custom image type with the specific requirements of what is needed, so cpu, memory, storage, network, etc...
+
+Another possible route is instance uptime. If the application is not required to be up 24 hours, so if the client is not working over weekends or nights and depending on the application itself it could possible to schedule an auto start and stop for the VM's.
+
 ---
 
 ### Task 5
 
 Secure and compliant application
+
+Below are some of the steps that can are currently put in place to help achieve compliance and to help establish and improve customer trust.
+
+##### Least privilege
+
+Any service accounts, or user accounts that are setup can be configured with access to resources that they are only required to have. If they are developer, or a support engineer it configured in a way that they can only have to these specific resources, such as cloud build, or compute instances. An additional step to this can be to confifure custom policies to adjust permissions from a more granular perspecitive, this can be great if we only want someone to be able to access a resource and only have the ability to perform a specific task. An example in this case, is only being able to adjust the status of a compute resources, so being able to start, stop or restart an instance.
+
+The root account used to setup and reqister with GCP cloud shouldn't be used by anyone as this has full explicit access to every resource within GCP. Only accounts that have privileges implicitly applied should be used.
+
+##### MFA
+
+Further on from the above point we can also enforce 2FA on user accounts to provide an extra layer of security when accessing the GCP environment. This should be enabled for every account, including the root account.
+
+##### Cloud Armour
+
+Used to lockdown the application via a WAF. On this we currently have an default rule enabled which comes with some preconfigured rules for XSS, SQLi, LFI, etc... some of these will come into action if required. Example, if the application requires protection from SQL injection, we can reference a preconfigured rule to fine tune what is needed.
+
+I can also detail where specific connections should be coming from by adding a spefic public IP address, or range of public IP addresses. If the client is only required is only required to access this application, along with ourselves from admin overview perspective. We can set this in the source IP address range.
+
+##### Firewall
+
+Specific rules have been setup to only allow connections on specific ports on the network to avoid any unwanted connections, or applications / services that otherwise do not need to be publicy available or accessed.
+
+In this case port 80 is the only port publicly available for access as this required to reach the web application via a connection through the external HTTP load balancer.
+
+##### IAP
+
+For administrative access to the VM's, IAP has been enabled on the environment. So via TCP forwarding I can access the VM's via SSH on the internal network instead of using an external IP address. None of the VM's will have an external IP address allocated and this service helps prevent them being publicy exposed to the internet.
+
+##### Cloud DLP
+
+This can be used from a data exfiltration perspective to scan storage repositories for potential sensitive data within the project environment, such as credit cards, names, ages, addresses, etc...
+
+##### VPC Service Controls
+
+Using VPC service controls we can setup a security perimiter around the environment blocking any external access by default unless otherwise implicitly allowed. So if a storage bucket is configured and policies are incorrectly set due to human error, in turn making this publicy accessible. VPC service will block ingress traffic, even if policies allow it.
 
 ---
 

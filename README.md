@@ -171,7 +171,7 @@ module "mig_template" {
   source_image_project = var.source_image_project
 
   tags = [
-    "allow-http", "app-flask-vm", "allow-ssh"
+    "allow-http", "allow-ssh"
   ]
 }
 

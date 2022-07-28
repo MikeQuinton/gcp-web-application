@@ -246,6 +246,18 @@ Using VPC service controls we can setup a security perimiter around the environm
 
 ---
 
+### CI/CD
+
+Achieved using CloudBuild and seperate projects for both environments. I would've liked to take a different approach only using one project along with terraform workspeaces and tfvars files to apply the infrastructure to seperate regions, zones, vpc's, etc... and storing the tfstate file in "env" folder located on the bucket sperating both prod and dev.
+
+For both projects I have setup a CloudBuild trigger and repositry branch. Both triggers pull from their respective branch and launches the config.
+
+##### Projects
+* apps-web-app-dev
+* apps-web-app-prod
+
+---
+
 ## Contact
 
 Michael Quinton
@@ -261,30 +273,3 @@ Michael Quinton
 [product-screenshot]: images/screenshot.png
 
 
-
-
-<!--
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
--->

@@ -206,6 +206,10 @@ module "mig_template" {
   tags = [
     "allow-http", "allow-ssh"
   ]
+  
+  depends_on = [
+   google_project_service.service
+ ]
 }
 
 module "mig" {
@@ -218,6 +222,10 @@ module "mig" {
   instance_template   = module.mig_template.self_link
   autoscaling_enabled = true
   cooldown_period     = 60
+  
+  depends_on = [
+   google_project_service.service
+ ]
 }
 
 /*****************************************

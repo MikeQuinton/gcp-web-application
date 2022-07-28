@@ -248,7 +248,7 @@ Using VPC service controls we can setup a security perimiter around the environm
 
 ### CI/CD
 
-Achieved using CloudBuild and seperate projects for both environments. I would've liked to take a different approach only using one project along with terraform workspeaces and tfvars files to apply the infrastructure to seperate regions, zones, vpc's, etc... and storing the tfstate file in "env" folder located on the bucket sperating both prod and dev.
+Achieved using CloudBuild and seperate projects for both environments. I would've liked to take a different approach only using one project along with terraform workspaces and tfvars files to apply the infrastructure to seperate regions, zones, vpc's, etc... and storing the tfstate file in "env" folder located on the bucket sperating both prod and dev.
 
 For both projects I have setup a CloudBuild trigger and repositry branch. Both triggers pull from their respective branch and launches the config.
 
